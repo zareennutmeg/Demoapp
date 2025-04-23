@@ -30,7 +30,13 @@ app.get('/api/message', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
- 
+ // Serve React build files from the correct folder
+app.use(express.static(path.join(__dirname, 'nutmeg-frontend/build')));
+
+// Catch-all route for React app (handle client-side routing)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'nutmeg-frontend/build', 'index.html'));
+});
   // Start the server
   app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
