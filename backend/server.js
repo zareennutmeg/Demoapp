@@ -15,7 +15,7 @@ const pool = new Pool({
   password: 'Yasir@123', //Replace with your DB password
   port: 5432,
 });
-client.connect();
+
 
 
 /// GET latest welcome message
@@ -30,12 +30,7 @@ app.get('/api/message', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../nutmeg-frontend/build')));
-// React catch-all route(after API routes)
-app.get('*', (req, res) => {  
-  res.sendFile(path.join(__dirname, '../nutmeg-frontend/build', 'index.html'));
-});  
+ 
   // Start the server
   app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
